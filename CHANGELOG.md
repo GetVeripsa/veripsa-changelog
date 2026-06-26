@@ -1,0 +1,157 @@
+# Changelog
+
+All user-visible changes to Veripsa Core, grouped by the date the change
+reached production.
+
+Entries describe behaviour you can observe in the Veripsa check comment,
+dashboard, or webhook payload. Internal refactors, audits, gate work, and
+infrastructure changes are intentionally omitted — see [`RELEASING.md`](./RELEASING.md)
+for the rule of thumb.
+
+Each entry links the public PR by number only. PR numbers refer to the
+Veripsa Core repository.
+
+---
+
+## 2026-06-26
+
+No customer-visible changes to Veripsa Core landed on this date. The day's
+Core work was internal (audit re-ingest, README documentation, a Zenn
+article title fix). The Core verdict comment, check behaviour, and
+read endpoints were unchanged from 2026-06-25.
+
+Customer-visible changes to the broader Veripsa **website and dashboard**
+(the `veripsa.com` surface — including a `/try` guided walkthrough,
+a `/whats-new` rolling page, a `/procurement` questionnaire response,
+a `/trust` page, `/docs` Quick Find, additional `/pricing` FAQ items,
+new category landing pages, and Japanese localisation across marketing
+and legal pages) live in the veripsa-platform repository and are
+surfaced at [veripsa.com/whats-new](https://veripsa.com/whats-new).
+This changelog covers Veripsa **Core** (the GitHub App and its read
+endpoints) only — see [`RELEASING.md`](./RELEASING.md) for the
+boundary.
+
+---
+
+## 2026-06-25
+
+### Fixed
+- When the Veripsa check fails or warns, the "Details" link on the check now
+  takes you to the verdict comment on the PR, not the bare commit page.
+  (#458)
+- Removed misleading wording on paused PRs that read as if the check was
+  "not a block" — the comment now reflects what the verdict actually does.
+  (#456)
+- Acknowledgement copy no longer reads as a Veripsa approval. Acknowledging a
+  warning silences it; it does not endorse the PR. (#459)
+- Co-change advisory no longer prints a literal percentage in the customer
+  comment. (#460)
+- Softened "likely git conflict" wording in the verdict comment so it doesn't
+  overstate certainty. (#457)
+- A newly-added file in a PR no longer blanks out the per-path verdict for
+  the rest of the PR. (#436, #465)
+- The "linked to X through a shared file" line in the verdict comment no
+  longer renders with a missing name or an empty `()` when an upstream
+  field is degenerate. (#498)
+- The merge-conflict heads-up on the verdict comment is now scoped to the
+  high-confidence verdicts only — a stray upstream flag can no longer
+  attach a "small rebase" line to a WARN, UNKNOWN, or CLEAR verdict.
+  (#505)
+- When a coupling is suppressed for noise reasons but the suppression is
+  uncorroborated, the verdict comment no longer reads as a clean clear —
+  it now surfaces the suppression, names the hub file, and treats the
+  signal as unknown. (#506)
+
+### Added
+- Honest README, refreshed SECURITY policy, and a published roadmap for the
+  Core repo. (#455)
+- The verdict comment now flags unresolved git conflict markers left in the
+  diff (the `<<<<<<<` / `=======` / `>>>>>>>` lines), as an advisory
+  callout. (#468)
+- Minimal Unity / C# coverage on the extractor so a Unity PR is no longer
+  reported as "Unknown" — the per-path verdict now shows a real signal on
+  `.cs` files. (#472)
+
+### Changed
+- Free-tier responsiveness: parallel pre-check reads on PRs and a freshness
+  cache on the health endpoint shorten the time from webhook to check
+  comment on small repos. (#461)
+- Draft PRs are no longer skipped. Veripsa now runs the full analysis on
+  drafts, with softened wording so the verdict reads as a scout signal
+  rather than a final call. (#474)
+- Reliability: a deploy that ships application code ahead of the matching
+  database schema is now refused at boot, and the Render deploy step
+  auto-applies the schema before the new build goes live, so a
+  schema-mismatch deploy can no longer silently break PR processing.
+  (#489, #490)
+- Reliability: a post-deploy synthetic check now replays a content-free
+  webhook against the App and rolls the deploy back if the verdict path
+  does not produce output, so a regression that only shows up under real
+  traffic is caught and reverted without operator action. (#491)
+- Reliability: a windowed failure-ratio signal is now surfaced on a
+  dedicated endpoint so the health page can move off green when a
+  sustained share of events fail, even when the request queue stays
+  shallow. (#501)
+
+---
+
+## 2026-06-23
+
+### Fixed
+- Co-change advisory now exposes an honest denominator (support and observed
+  counts) on the structural-lens reader, so you can see how strong the
+  signal actually is. (#449)
+- External-import paths in Symfony/Laravel projects no longer fan out and
+  generate spurious couplings to test targets. (#447)
+- Rust external-crate and inline-module imports no longer couple to a test
+  target. (#444)
+- Default-branch changes no longer leave orphaned stale-graph entries from
+  the previous default branch. (#446)
+- Renaming a file no longer leaves an orphaned graph coordinate or stale
+  alert. (#436, #441)
+- Large `.sql` schema dumps are no longer silently skipped — the extractor
+  now applies a schema-aware size cap. (#442)
+- A coordinate-migration concurrency race no longer collides on the primary
+  key. (#445)
+
+### Added
+- Per-repo scope is now available on the structural-lens reader so you can
+  ask for one repo's view of an installation. (#449)
+- The check's refresh-path title is now deterministic and the raw co-change
+  count has been dropped from the customer-facing comment. (#440)
+- A new diagnostic tool helps the Veripsa team categorize uncovered
+  collision pairs without reading source. (#454)
+
+### Changed
+- One-command emergency suspend/resume of the Veripsa service, with a
+  matching runbook section. (No customer-visible behaviour change unless
+  used.) (#451)
+
+---
+
+## 2026-06-22
+
+### Added
+- The repo hotspot surface now accepts an **hours-scale** window (1h up to
+  90d), not just days. (#414)
+- The "Lately" feed now carries the originating PR (change) on each row.
+  (#411)
+- Land-order suggestions in the verdict comment now **link the colliding
+  PR** so reviewers can jump straight to it. (#412)
+
+### Fixed
+- Land-order suggestions are deduplicated per PR/branch — overlapping PRs
+  no longer print the same line N times. (no PR number printed in summary;
+  see commit `dba88c7`)
+- Contended-banner detection is keyed on the underlying change, not on the
+  author login, so two commits from the same login on the same change no
+  longer mask the collision. (#419)
+
+---
+
+## 2026-06-21 and earlier
+
+Older changes have not yet been backfilled into this changelog. If you
+relied on a Veripsa behaviour that changed before this date and want it
+documented, please open a [changelog
+request](./.github/ISSUE_TEMPLATE/changelog-request.md).
