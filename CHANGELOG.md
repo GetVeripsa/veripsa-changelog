@@ -15,18 +15,17 @@ Veripsa Core repository.
 
 ## 2026-06-26
 
-No customer-visible changes to Veripsa Core landed on this date. The day's
-Core work was internal (audit re-ingest, README documentation, a Zenn
-article title fix). The Core verdict comment, check behaviour, and
-read endpoints were unchanged from 2026-06-25.
+No customer-visible changes to Veripsa Core landed on this date. The Core
+verdict comment, check behaviour, and read endpoints were unchanged from
+2026-06-25.
 
 Customer-visible changes to the broader Veripsa **website and dashboard**
 (the `veripsa.com` surface — including a `/try` guided walkthrough,
 a `/whats-new` rolling page, a `/procurement` questionnaire response,
 a `/trust` page, `/docs` Quick Find, additional `/pricing` FAQ items,
 new category landing pages, and Japanese localisation across marketing
-and legal pages) live in the veripsa-platform repository and are
-surfaced at [veripsa.com/whats-new](https://veripsa.com/whats-new).
+and legal pages) are surfaced at
+[veripsa.com/whats-new](https://veripsa.com/whats-new).
 This changelog covers Veripsa **Core** (the GitHub App and its read
 endpoints) only — see [`RELEASING.md`](./RELEASING.md) for the
 boundary.
@@ -44,23 +43,17 @@ boundary.
   (#456)
 - Acknowledgement copy no longer reads as a Veripsa approval. Acknowledging a
   warning silences it; it does not endorse the PR. (#459)
-- Co-change advisory no longer prints a literal percentage in the customer
-  comment. (#460)
+- A confusing percentage has been removed from the verdict comment. (#460)
 - Softened "likely git conflict" wording in the verdict comment so it doesn't
   overstate certainty. (#457)
 - A newly-added file in a PR no longer blanks out the per-path verdict for
   the rest of the PR. (#436, #465)
 - The "linked to X through a shared file" line in the verdict comment no
-  longer renders with a missing name or an empty `()` when an upstream
-  field is degenerate. (#498)
-- The merge-conflict heads-up on the verdict comment is now scoped to the
-  high-confidence verdicts only — a stray upstream flag can no longer
-  attach a "small rebase" line to a WARN, UNKNOWN, or CLEAR verdict.
-  (#505)
-- When a coupling is suppressed for noise reasons but the suppression is
-  uncorroborated, the verdict comment no longer reads as a clean clear —
-  it now surfaces the suppression, names the hub file, and treats the
-  signal as unknown. (#506)
+  longer renders with a missing name or an empty parenthesis. (#498)
+- The merge-conflict heads-up is no longer attached when the underlying
+  signal is uncertain. (#505)
+- A coupling that previously read as Clear in a specific edge case now
+  reads as Unknown, with a pointer to the file involved. (#506)
 
 ### Added
 - Honest README, refreshed SECURITY policy, and a published roadmap for the
@@ -68,9 +61,9 @@ boundary.
 - The verdict comment now flags unresolved git conflict markers left in the
   diff (the `<<<<<<<` / `=======` / `>>>>>>>` lines), as an advisory
   callout. (#468)
-- Minimal Unity / C# coverage on the extractor so a Unity PR is no longer
-  reported as "Unknown" — the per-path verdict now shows a real signal on
-  `.cs` files. (#472)
+- Minimal Unity / C# coverage so a Unity PR is no longer reported as
+  "Unknown" — the per-path verdict now shows a real signal on `.cs`
+  files. (#472)
 
 ### Changed
 - Free-tier responsiveness: parallel pre-check reads on PRs and a freshness
@@ -98,29 +91,25 @@ boundary.
 ## 2026-06-23
 
 ### Fixed
-- Co-change advisory now exposes an honest denominator (support and observed
-  counts) on the structural-lens reader, so you can see how strong the
+- A verdict-comment advisory now exposes an honest denominator (the observed
+  counts) on the dashboard read endpoint, so you can see how strong the
   signal actually is. (#449)
-- External-import paths in Symfony/Laravel projects no longer fan out and
-  generate spurious couplings to test targets. (#447)
-- Rust external-crate and inline-module imports no longer couple to a test
+- Symfony and Laravel projects no longer see false collision warnings
+  caused by framework imports. (#447)
+- Rust verdicts no longer flag spurious overlap on a test
   target. (#444)
-- Default-branch changes no longer leave orphaned stale-graph entries from
-  the previous default branch. (#446)
-- Renaming a file no longer leaves an orphaned graph coordinate or stale
-  alert. (#436, #441)
-- Large `.sql` schema dumps are no longer silently skipped — the extractor
-  now applies a schema-aware size cap. (#442)
-- A coordinate-migration concurrency race no longer collides on the primary
-  key. (#445)
+- Default-branch changes no longer leave stale entries from the previous
+  default branch. (#446)
+- Renaming a file no longer leaves a stale path or a stale alert. (#436, #441)
+- Large `.sql` schema dumps are no longer silently skipped on the Veripsa
+  side. (#442)
+- A rare race on file rename no longer collides on the primary key. (#445)
 
 ### Added
-- Per-repo scope is now available on the structural-lens reader so you can
+- Per-repo scope is now available on the dashboard read endpoint so you can
   ask for one repo's view of an installation. (#449)
-- The check's refresh-path title is now deterministic and the raw co-change
+- The check's refresh-path title is now deterministic and the raw
   count has been dropped from the customer-facing comment. (#440)
-- A new diagnostic tool helps the Veripsa team categorize uncovered
-  collision pairs without reading source. (#454)
 
 ### Changed
 - One-command emergency suspend/resume of the Veripsa service, with a
@@ -141,11 +130,9 @@ boundary.
 
 ### Fixed
 - Land-order suggestions are deduplicated per PR/branch — overlapping PRs
-  no longer print the same line N times. (no PR number printed in summary;
-  see commit `dba88c7`)
-- Contended-banner detection is keyed on the underlying change, not on the
-  author login, so two commits from the same login on the same change no
-  longer mask the collision. (#419)
+  no longer print the same line N times.
+- Two consecutive pushes from the same author on the same change no longer
+  hide the collision warning on a PR. (#419)
 
 ---
 

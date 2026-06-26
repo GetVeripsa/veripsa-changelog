@@ -81,3 +81,7 @@ it. If no, skip it.
 
 This file is part of the public changelog repo and is the source of truth
 for what "user-visible" means at Veripsa.
+
+Older entries that predate these rules are retroactively rewritten when an
+audit catches them — the rules above apply to the file as a whole, not just
+the most recent block.
