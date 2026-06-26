@@ -42,13 +42,13 @@ repo. We tag a GitHub Release for each date block so you get one notification
 per deploy day, not one per merged PR.
 
 You can also follow the [Veripsa Core
-roadmap](../README.md#roadmap) — the changelog tells you what already
+roadmap](https://github.com/GetVeripsa/veripsa-roadmap) — the changelog tells you what already
 shipped; the roadmap tells you what's next.
 
 ## What this repo does NOT contain
 
-- **No engine internals.** We do not document how the code graph is built,
-  what the resolver does, or how co-change is corroborated. The changelog
+- **No engine internals.** We do not document how Veripsa decides anything
+  internally — only what changes from your seat. The changelog
   describes what *you*, the user, will notice — not how we made it happen.
 - **No roadmap commitments.** Entries are past-tense, "this shipped on date
   X". Future-tense plans live in the Core README's Roadmap section, not here.
