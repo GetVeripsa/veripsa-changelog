@@ -19,7 +19,7 @@ that would only be visible to someone reading our codebase.
 
 ## Format
 
-Each release block is a date header followed by **Added / Changed / Fixed**
+Each changelog block is a date header followed by **Added / Changed / Fixed**
 subsections, similar to [Keep a Changelog](https://keepachangelog.com/):
 
 ```
@@ -37,9 +37,17 @@ deploy to production** instead.
 
 ## How to subscribe
 
-Click **Watch → Releases and discussions** (or **Custom → Releases**) on this
-repo. We tag a GitHub Release for each date block so you get one notification
-per deploy day, not one per merged PR.
+Click **Watch → All activity** on this repo. Changelog updates land as pull
+requests, so watching the repo notifies you when new entries go up.
+
+If you prefer a feed reader, subscribe to the commit feed instead:
+
+```
+https://github.com/GetVeripsa/veripsa-changelog/commits/main.atom
+```
+
+We do **not** currently tag GitHub Releases in this repo, so a
+**Custom → Releases** watch would never notify you — use **All activity**.
 
 You can also follow the [Veripsa Core
 roadmap](https://github.com/GetVeripsa/veripsa-roadmap) — the changelog tells you what already
