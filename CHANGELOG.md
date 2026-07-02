@@ -13,6 +13,45 @@ Veripsa Core repository.
 
 ---
 
+## 2026-07-02
+
+No customer-visible changes to Veripsa Core landed on this date. The Core
+verdict comment, check behaviour, and read endpoints were unchanged from
+2026-06-25.
+
+Customer-visible changes to the broader Veripsa **website and dashboard**
+(the `veripsa.com` surface — clearer onboarding and evaluation copy across
+the docs guide, how-it-works, and homepage; and a clearer notice on the
+signed-in dashboard when GitHub installation details are momentarily
+unavailable, so a temporary lookup failure no longer reads as "nothing
+installed") are surfaced at
+[veripsa.com/whats-new](https://veripsa.com/whats-new).
+This changelog covers Veripsa **Core** (the GitHub App and its read
+endpoints) only — see [`RELEASING.md`](./RELEASING.md) for the
+boundary.
+
+---
+
+## 2026-07-01
+
+No customer-visible changes to Veripsa Core landed on this date. The Core
+verdict comment, check behaviour, and read endpoints were unchanged from
+2026-06-25.
+
+Customer-visible changes to the broader Veripsa **website and dashboard**
+(the `veripsa.com` surface — the standalone example page now redirects into
+the dashboard demo so there is one current demo surface; the customers page
+refocused on an evaluation path while named stories do not yet exist; the
+Trust Center trimmed to state only current, verifiable practice; and more
+precise wording on public pages, including the Japanese mirror, about which
+pull requests are covered and how a pause reads) are surfaced at
+[veripsa.com/whats-new](https://veripsa.com/whats-new).
+This changelog covers Veripsa **Core** (the GitHub App and its read
+endpoints) only — see [`RELEASING.md`](./RELEASING.md) for the
+boundary.
+
+---
+
 ## 2026-06-26
 
 No customer-visible changes to Veripsa Core landed on this date. The Core
